@@ -5,7 +5,7 @@ import { MdHomeRepairService, MdOutlineSubscriptions } from "react-icons/md";
 
 export default function DashboardStatsContainer() {
   return (
-    <div className="grid grid-cols-3 gap-5">
+    <div className="grid md:grid-cols-3 grid-cols-1 gap-5">
       <StatItem
         icon={<IoPersonAddSharp />}
         stat={2}

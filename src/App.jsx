@@ -8,6 +8,9 @@ import ServicePage from "./pages/servicesPage/ServicePage";
 import RequestsPage from "./pages/Requests/RequestsPage";
 import AddNewServicePage from "./pages/servicesPage/AddNewServicePage";
 import EditService from "./pages/servicesPage/EditService";
+import ProfilePage from "./pages/profile/ProfilePage";
+import NotificationPage from "./pages/notifications/NotificationPage";
+import LoginPage from "./pages/login/LoginPage";
 
 export default function App() {
   const router = createBrowserRouter([
@@ -36,6 +39,18 @@ export default function App() {
         {
           path: "requests",
           element: <RequestsPage />,
+        },
+        {
+          path: "profile",
+          element: <ProfilePage />,
+        },
+        {
+          path: "notification",
+          element: <NotificationPage />,
+        },
+        {
+          path: "login",
+          element: <LoginPage />,
         },
       ],
     },

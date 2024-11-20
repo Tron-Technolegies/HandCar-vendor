@@ -12,7 +12,7 @@ export default function FormSelect({ title, value, onchange, list, multi }) {
           value={value}
           multiple={multi ? true : false}
           onChange={onchange}
-          className={`w-full py-1 px-3 rounded-lg bg-[white] border border-gray-300 text-gray-900 ${
+          className={`w-full py-1 px-3 rounded-lg bg-[#f5f6f9] border border-gray-300 text-gray-900 ${
             multi ? "h-40" : "h-11"
           }`}
         >

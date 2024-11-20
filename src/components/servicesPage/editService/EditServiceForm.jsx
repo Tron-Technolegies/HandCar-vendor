@@ -5,7 +5,7 @@ import { FiUpload } from "react-icons/fi";
 
 export default function EditServiceForm() {
   return (
-    <div>
+    <div className="bg-white p-5 rounded-lg">
       <FormInput
         title={"Name of Service"}
         type={"text"}
@@ -20,7 +20,7 @@ export default function EditServiceForm() {
         <textarea
           rows={7}
           placeholder="Enter your description"
-          className="px-3 py-2 bg-[white] rounded-lg border border-gray-300 text-gray-900"
+          className="px-3 py-2 bg-[#f5f6f9] rounded-lg border border-gray-300 text-gray-900"
         ></textarea>
       </div>
       <div className="flex flex-col mb-3">

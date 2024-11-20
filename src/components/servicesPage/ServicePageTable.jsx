@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -9,6 +9,7 @@ import Paper from "@mui/material/Paper";
 import { Link } from "react-router-dom";
 import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { VendorContext } from "../../VendorContext";
 
 function createData(name, category, price) {
   return { name, category, price };
@@ -24,6 +25,7 @@ const rows = [
 ];
 
 export default function ServicePageTable() {
+  const { setShowDeletePopup } = useContext(VendorContext);
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -75,7 +77,7 @@ export default function ServicePageTable() {
                   <Link to={"/services/1/edit"}>
                     <FaRegEdit />
                   </Link>
-                  <button>
+                  <button onClick={() => setShowDeletePopup(true)}>
                     <RiDeleteBin6Line />
                   </button>
                 </div>
