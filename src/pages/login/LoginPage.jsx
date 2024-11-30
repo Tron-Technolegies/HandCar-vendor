@@ -1,8 +1,10 @@
 import { motion } from "framer-motion";
-import React from "react";
+import React, { useState } from "react";
 import FormInput from "../../components/FormInput";
 
 export default function LoginPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -20,8 +22,18 @@ export default function LoginPage() {
         <img src="/logo.png" className="w-[150px]"></img>
         <h4 className="text-xl font-semibold">VENDOR LOGIN</h4>
         <div className="w-full px-10 flex flex-col gap-3">
-          <FormInput type={"email"} placeholder={"example@gmail.com"} />
-          <FormInput placeholder={"Password"} type={"password"} />
+          <FormInput
+            type={"email"}
+            placeholder={"example@gmail.com"}
+            value={email}
+            onchange={(e) => setEmail(e.target.value)}
+          />
+          <FormInput
+            placeholder={"Password"}
+            type={"password"}
+            value={password}
+            onchange={(e) => setPassword(e.target.value)}
+          />
         </div>
         <div className="w-full px-10 flex flex-col gap-3 items-center">
           <button className="px-5 py-3 bg-[#06214E] rounded-lg w-full text-white font-semibold">
