@@ -28,7 +28,7 @@ export default function DashboardStatsContainer() {
         color={"#0DA06A"}
         fill={"#a7f8da"}
       />
-      <StatItem
+      {/* <StatItem
         icon={<MdOutlineSubscriptions />}
         stat={28}
         statName={"Total Subscriptions"}
@@ -38,7 +38,7 @@ export default function DashboardStatsContainer() {
         text={"text-[#4779CC]"}
         color={"#4779CC"}
         fill={"#c1d4f3"}
-      />
+      /> */}
     </div>
   );
 }
