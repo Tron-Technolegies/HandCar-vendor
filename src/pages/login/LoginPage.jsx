@@ -1,10 +1,15 @@
 import { motion } from "framer-motion";
 import React, { useState } from "react";
 import FormInput from "../../components/FormInput";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
+import useLogin from "../../hooks/auth/useLogin";
+import Loading from "../../components/Loading";
 
 export default function LoginPage() {
-  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
+  const { loading, login } = useLogin();
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -22,12 +27,21 @@ export default function LoginPage() {
         <img src="/logo.png" className="w-[150px]"></img>
         <h4 className="text-xl font-semibold">VENDOR LOGIN</h4>
         <div className="w-full px-10 flex flex-col gap-3">
-          <FormInput
-            type={"email"}
-            placeholder={"example@gmail.com"}
-            value={email}
-            onchange={(e) => setEmail(e.target.value)}
-          />
+          <div className="flex flex-col gap-2 mb-2">
+            <label className="text-sm  text-[#344054]">Mobile No:</label>
+            <PhoneInput
+              country={"ae"} // Set default country code (UAE in this case)
+              value={phone}
+              onChange={setPhone}
+              inputStyle={{
+                padding: "20px",
+                paddingLeft: "40px",
+                backgroundColor: "#f5f6f9",
+                width: "100%",
+                borderColor: "#D0D5DD",
+              }}
+            />
+          </div>
           <FormInput
             placeholder={"Password"}
             type={"password"}
@@ -36,9 +50,13 @@ export default function LoginPage() {
           />
         </div>
         <div className="w-full px-10 flex flex-col gap-3 items-center">
-          <button className="px-5 py-3 bg-[#06214E] rounded-lg w-full text-white font-semibold">
+          <button
+            className="px-5 py-3 bg-[#06214E] rounded-lg w-full text-white font-semibold"
+            onClick={() => login({ phone, password })}
+          >
             Login
           </button>
+          {loading && <Loading />}
         </div>
       </motion.div>
     </motion.div>
