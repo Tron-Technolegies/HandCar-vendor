@@ -1,21 +1,26 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { base_url } from "../../constants";
+import { VendorContext } from "../../VendorContext";
+import { useNavigate } from "react-router-dom";
 
 const useGetUserDetaiils = () => {
   const [loading, setLoading] = useState(false);
-  const [user, setUser] = useState({});
+  const { user, setUser } = useContext(VendorContext);
+  const navigate = useNavigate();
 
   const getUserDetails = async () => {
     setLoading(true);
     try {
-      const res = await axios.get("url");
+      const res = await axios.get(`${base_url}/Vendor_Profile`, {
+        withCredentials: true,
+      });
       const data = res.data;
-      setUser(data.user);
+      setUser(data);
     } catch (err) {
-      toast.error(
-        err?.response?.data?.msg || err?.error || "something went wrong"
-      );
+      console.log(err);
+      navigate("/login");
     } finally {
       setLoading(false);
     }
@@ -24,7 +29,11 @@ const useGetUserDetaiils = () => {
     getUserDetails();
   }, []);
 
-  return { loading, user };
+  const refetch = () => {
+    getUserDetails();
+  };
+
+  return { loading, user, refetch };
 };
 
 export default useGetUserDetaiils;

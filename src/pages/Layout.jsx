@@ -5,11 +5,16 @@ import { Outlet } from "react-router-dom";
 import { VendorContext } from "../VendorContext";
 import SmallScreenBar from "../components/SideBar/SmallScreenBar";
 import DeletePopup from "../components/DeletePopup";
+import useGetUserDetaiils from "../hooks/auth/useGetUserDetaiils";
+import Loading from "../components/Loading";
 
 export default function Layout() {
   const { showSmallBar, showDeletePopup, setShowDeletePopup } =
     useContext(VendorContext);
-  return (
+  const { loading } = useGetUserDetaiils();
+  return loading ? (
+    <Loading />
+  ) : (
     <div className="flex mx-0">
       <div className="hidden lg:block">
         <SideBar />
