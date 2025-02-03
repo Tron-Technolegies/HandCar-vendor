@@ -3,9 +3,11 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { base_url } from "../../constants";
+import useGetUserDetaiils from "./useGetUserDetaiils";
 
 const useLogin = () => {
   const [loading, setLoading] = useState(false);
+  const { refetch } = useGetUserDetaiils();
   const navigate = useNavigate();
 
   const login = async ({ phone, password }) => {
@@ -21,6 +23,7 @@ const useLogin = () => {
       const data = res.data;
       toast.success("successfully logged in");
       navigate("/");
+      refetch();
     } catch (err) {
       toast.error(
         err?.response?.data?.msg || err?.error || "something went wrong"

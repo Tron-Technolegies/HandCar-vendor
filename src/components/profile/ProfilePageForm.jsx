@@ -2,16 +2,19 @@ import React, { useState } from "react";
 import FormInput from "../FormInput";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import FormSelect from "../FormSelect";
+import { FiUpload } from "react-icons/fi";
 
 export default function ProfilePageForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [mobile, setMobile] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
-  const [location, setLocation] = useState("");
-  const [password, setPassword] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [address, setAddress] = useState("");
+  const [category, setCategory] = useState("");
+  const [details, setDetails] = useState("");
+  const [image, setImage] = useState("");
+  const [price, setPrice] = useState("");
 
   return (
     <div className="p-5 rounded-lg bg-white">
@@ -60,33 +63,48 @@ export default function ProfilePageForm() {
         />
       </div>
       <FormInput
-        title={"Location"}
+        title={"Address"}
         type={"text"}
-        placeholder={"Enter Location"}
-        value={location}
-        onchange={(e) => setLocation(e.target.value)}
+        placeholder={"Enter Address"}
+        value={address}
+        onchange={(e) => setAddress(e.target.value)}
       />
+      <FormSelect
+        title={"Service Category"}
+        value={category}
+        onchange={(e) => setCategory(e.target.value)}
+        list={["Category 1", "Category 2", "Category 3"]}
+      />
+      <div className="flex flex-col mb-3">
+        <label className="text-sm mb-3">Service Details</label>
+        <textarea
+          rows={7}
+          value={details}
+          onchange={(e) => setDetails(e.target.value)}
+          placeholder="Enter your description"
+          className="px-3 py-2 bg-[#f5f6f9] rounded-lg border border-gray-300 text-gray-900"
+        ></textarea>
+      </div>
+      <div className="flex flex-col mb-3">
+        <label className="text-sm mb-3">Service Image</label>
+        <label className="w-16 h-16 border rounded-lg border-[#959595] text-[#959595] text-3xl flex justify-center items-center cursor-pointer">
+          <FiUpload />
+          <input
+            type="file"
+            hidden
+            value={image}
+            onchange={(e) => setImage(e.target.value)}
+          />
+        </label>
+      </div>
       <FormInput
-        title={"Password"}
-        type={"password"}
-        placeholder={"xxxxxxxxx"}
-        value={password}
-        onchange={(e) => setPassword(e.target.value)}
+        title={"Price"}
+        value={price}
+        onchange={(e) => setPrice(e.target.value)}
+        type={"number"}
+        placeholder={"Enter Price"}
       />
-      <FormInput
-        title={"New Password"}
-        type={"password"}
-        value={newPassword}
-        onchange={(e) => setNewPassword(e.target.value)}
-        placeholder={"Enter your new Password"}
-      />
-      <FormInput
-        title={"Confirm New Password"}
-        type={"password"}
-        value={confirmPassword}
-        onchange={(e) => confirmPassword(e.target.value)}
-        placeholder={"Confirm your new Password"}
-      />
+
       <div className="flex justify-end">
         <button className="px-4 py-2 bg-[#06214E] rounded-lg text-white ">
           Update Profile

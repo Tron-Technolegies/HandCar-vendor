@@ -1,18 +1,26 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { base_url } from "../../constants";
+import { VendorContext } from "../../VendorContext";
 
 const useLogout = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { setUser } = useContext(VendorContext);
 
   const logout = async () => {
     setLoading(true);
     try {
-      const res = await axios.post("url");
+      const res = await axios.post(
+        `${base_url}/Logout`,
+        {},
+        { withCredentials: true }
+      );
       const data = res.data;
       toast.success("successfully logged out");
+      setUser(null);
       navigate("/login");
     } catch (err) {
       toast.error(

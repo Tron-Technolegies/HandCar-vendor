@@ -11,6 +11,7 @@ import EditService from "./pages/servicesPage/EditService";
 import ProfilePage from "./pages/profile/ProfilePage";
 import NotificationPage from "./pages/notifications/NotificationPage";
 import LoginPage from "./pages/login/LoginPage";
+import UpdatePasswordPage from "./pages/updatePassword/UpdatePasswordPage";
 
 export default function App() {
   const router = createBrowserRouter([
@@ -43,6 +44,10 @@ export default function App() {
         {
           path: "profile",
           element: <ProfilePage />,
+        },
+        {
+          path: "update-password",
+          element: <UpdatePasswordPage />,
         },
         {
           path: "notification",

@@ -1,5 +1,7 @@
 import { IoPersonAddSharp } from "react-icons/io5";
 import { MdHomeRepairService, MdOutlineSubscriptions } from "react-icons/md";
+import { FaUser } from "react-icons/fa";
+import { RxUpdate } from "react-icons/rx";
 
 export const navItems = [
   // {
@@ -16,8 +18,20 @@ export const navItems = [
   },
   {
     id: 3,
-    icon: <IoPersonAddSharp />,
-    name: "Requests",
-    path: "/requests",
+    icon: <FaUser />,
+    name: "My Profile",
+    path: "/profile",
   },
+  {
+    id: 4,
+    icon: <RxUpdate />,
+    name: "Update Password",
+    path: "/update-password",
+  },
+  // {
+  //   id: 3,
+  //   icon: <IoPersonAddSharp />,
+  //   name: "Requests",
+  //   path: "/requests",
+  // },
 ];

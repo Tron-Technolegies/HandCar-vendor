@@ -10,7 +10,7 @@ export default function ProfileBox({ setDropdown, showDropdown }) {
       onClick={() => setDropdown(!showDropdown)}
     >
       <img src="/profile.jpg" className="w-[30px] h-[30px] rounded-full"></img>
-      <p>{user.vendor_name}</p>
+      {user && <p>{user.vendor_name}</p>}
       <button>
         <FaAngleDown />
       </button>
