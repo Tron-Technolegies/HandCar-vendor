@@ -1,20 +1,25 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import FormInput from "../FormInput";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import FormSelect from "../FormSelect";
 import { FiUpload } from "react-icons/fi";
+import { VendorContext } from "../../VendorContext";
+import useUpdateUserDetails from "../../hooks/auth/useUpdateUserDetails";
+import Loading from "../Loading";
 
 export default function ProfilePageForm() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [mobile, setMobile] = useState("");
-  const [whatsapp, setWhatsapp] = useState("");
-  const [address, setAddress] = useState("");
-  const [category, setCategory] = useState("");
-  const [details, setDetails] = useState("");
-  const [image, setImage] = useState("");
-  const [price, setPrice] = useState("");
+  const { user } = useContext(VendorContext);
+  const [name, setName] = useState(user?.vendor_name || "");
+  const [email, setEmail] = useState(user?.email || "");
+  const [mobile, setMobile] = useState(user?.phone_number || "");
+  const [whatsapp, setWhatsapp] = useState(user?.whatsapp_number || "");
+  const [address, setAddress] = useState(user?.address || "");
+  const [category, setCategory] = useState(user?.service_category || "");
+  const [details, setDetails] = useState(user?.service_details || "");
+  const [image, setImage] = useState([]);
+  const [price, setPrice] = useState(user?.rate || "");
+  const { loading, updateUserDetails } = useUpdateUserDetails();
 
   return (
     <div className="p-5 rounded-lg bg-white">
@@ -33,7 +38,7 @@ export default function ProfilePageForm() {
         onchange={(e) => setEmail(e.target.value)}
       />
       <div className="flex flex-col gap-2 mb-2">
-        <label className="text-sm  text-[#344054]">Mobile No:</label>
+        <label className="text-sm  text-[#344054]">Mobile No</label>
         <PhoneInput
           country={"ae"} // Set default country code (UAE in this case)
           value={mobile}
@@ -48,7 +53,7 @@ export default function ProfilePageForm() {
         />
       </div>
       <div className="flex flex-col gap-2 mb-2">
-        <label className="text-sm  text-[#344054]">WhatsApp No:</label>
+        <label className="text-sm  text-[#344054]">WhatsApp No</label>
         <PhoneInput
           country={"ae"} // Set default country code (UAE in this case)
           value={whatsapp}
@@ -80,7 +85,7 @@ export default function ProfilePageForm() {
         <textarea
           rows={7}
           value={details}
-          onchange={(e) => setDetails(e.target.value)}
+          onChange={(e) => setDetails(e.target.value)}
           placeholder="Enter your description"
           className="px-3 py-2 bg-[#f5f6f9] rounded-lg border border-gray-300 text-gray-900"
         ></textarea>
@@ -92,8 +97,8 @@ export default function ProfilePageForm() {
           <input
             type="file"
             hidden
-            value={image}
-            onchange={(e) => setImage(e.target.value)}
+            multiple
+            onChange={(e) => setImage([...e.target.files])}
           />
         </label>
       </div>
@@ -106,9 +111,26 @@ export default function ProfilePageForm() {
       />
 
       <div className="flex justify-end">
-        <button className="px-4 py-2 bg-[#06214E] rounded-lg text-white ">
+        <button
+          onClick={() =>
+            updateUserDetails({
+              id: user.id,
+              name,
+              email,
+              mobile,
+              whatsapp,
+              address,
+              category,
+              details,
+              price,
+              image,
+            })
+          }
+          className="px-4 py-2 bg-[#06214E] rounded-lg text-white "
+        >
           Update Profile
         </button>
+        {loading && <Loading />}
       </div>
     </div>
   );

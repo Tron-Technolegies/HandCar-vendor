@@ -29,7 +29,7 @@ export default function AddServiceForm() {
         <textarea
           rows={7}
           value={details}
-          onchange={(e) => setDetails(e.target.value)}
+          onChange={(e) => setDetails(e.target.value)}
           placeholder="Enter your description"
           className="px-3 py-2 bg-[#f5f6f9] rounded-lg border border-gray-300 text-gray-900"
         ></textarea>
@@ -42,7 +42,7 @@ export default function AddServiceForm() {
             type="file"
             hidden
             value={image}
-            onchange={(e) => setImage(e.target.value)}
+            onChange={(e) => setImage(e.target.value)}
           />
         </label>
       </div>
