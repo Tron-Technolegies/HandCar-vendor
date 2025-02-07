@@ -10,12 +10,12 @@ export const navItems = [
   //   name: "Subscriptions",
   //   path: "/subscriptions",
   // },
-  {
-    id: 2,
-    icon: <MdHomeRepairService />,
-    name: "Services",
-    path: "/services",
-  },
+  // {
+  //   id: 2,
+  //   icon: <MdHomeRepairService />,
+  //   name: "Services",
+  //   path: "/services",
+  // },
   {
     id: 3,
     icon: <FaUser />,

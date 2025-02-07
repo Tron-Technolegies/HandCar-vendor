@@ -2,9 +2,11 @@ import axios from "axios";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { base_url } from "../../constants";
+import { useNavigate } from "react-router-dom";
 
 const useUpdateUserDetails = () => {
   const [loading, setLoading] = useState("");
+  const navigate = useNavigate();
   const updateUserDetails = async ({
     name,
     email,
@@ -42,6 +44,7 @@ const useUpdateUserDetails = () => {
       );
       const data = res.data;
       toast.success("Profile updated successfully");
+      navigate("/");
     } catch (err) {
       toast.error(
         err?.response?.data?.msg || err?.error || "something went wrong"

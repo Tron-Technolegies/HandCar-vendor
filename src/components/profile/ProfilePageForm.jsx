@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import FormInput from "../FormInput";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
@@ -7,21 +7,44 @@ import { FiUpload } from "react-icons/fi";
 import { VendorContext } from "../../VendorContext";
 import useUpdateUserDetails from "../../hooks/auth/useUpdateUserDetails";
 import Loading from "../Loading";
+import useGetServiceCategories from "../../hooks/auth/useGetServiceCategories";
+import useGetUpdateProfileDetails from "../../hooks/auth/useGetUpdateProfileDetails";
 
 export default function ProfilePageForm() {
   const { user } = useContext(VendorContext);
-  const [name, setName] = useState(user?.vendor_name || "");
-  const [email, setEmail] = useState(user?.email || "");
-  const [mobile, setMobile] = useState(user?.phone_number || "");
-  const [whatsapp, setWhatsapp] = useState(user?.whatsapp_number || "");
-  const [address, setAddress] = useState(user?.address || "");
-  const [category, setCategory] = useState(user?.service_category || "");
-  const [details, setDetails] = useState(user?.service_details || "");
+  const { loading: initialLoading, profile } = useGetUpdateProfileDetails({
+    id: user?.id,
+  });
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [mobile, setMobile] = useState("");
+  const [whatsapp, setWhatsapp] = useState("");
+  const [address, setAddress] = useState("");
+  const [category, setCategory] = useState("");
+  const [details, setDetails] = useState("");
   const [image, setImage] = useState([]);
-  const [price, setPrice] = useState(user?.rate || "");
+  const [oldImages, setOldImages] = useState([]);
+  const [price, setPrice] = useState("");
   const { loading, updateUserDetails } = useUpdateUserDetails();
+  const { loading: categoryLoading, categories } = useGetServiceCategories();
 
-  return (
+  useEffect(() => {
+    if (profile) {
+      setName(profile.vendor_name);
+      setEmail(profile.email);
+      setMobile(profile.phone_number);
+      setWhatsapp(profile.whatsapp_number);
+      setAddress(profile.address);
+      setCategory(profile.service_category);
+      setDetails(profile.service_details);
+      setPrice(profile.rate);
+      setOldImages(profile.images);
+    }
+  }, [initialLoading, profile]);
+
+  return initialLoading ? (
+    <Loading />
+  ) : (
     <div className="p-5 rounded-lg bg-white">
       <FormInput
         title={"Full Name"}
@@ -78,7 +101,7 @@ export default function ProfilePageForm() {
         title={"Service Category"}
         value={category}
         onchange={(e) => setCategory(e.target.value)}
-        list={["Category 1", "Category 2", "Category 3"]}
+        list={categories.map((x) => x.name)}
       />
       <div className="flex flex-col mb-3">
         <label className="text-sm mb-3">Service Details</label>
@@ -92,15 +115,24 @@ export default function ProfilePageForm() {
       </div>
       <div className="flex flex-col mb-3">
         <label className="text-sm mb-3">Service Image</label>
-        <label className="w-16 h-16 border rounded-lg border-[#959595] text-[#959595] text-3xl flex justify-center items-center cursor-pointer">
-          <FiUpload />
-          <input
-            type="file"
-            hidden
-            multiple
-            onChange={(e) => setImage([...e.target.files])}
-          />
-        </label>
+        <div className="flex gap-3 items-center">
+          <label className="w-16 h-16 border rounded-lg border-[#959595] text-[#959595] text-3xl flex justify-center items-center cursor-pointer">
+            <FiUpload />
+            <input
+              type="file"
+              hidden
+              multiple
+              onChange={(e) => setImage([...e.target.files])}
+            />
+          </label>
+          <div>{image.length > 0 && <p>{image.length} files uploaded</p>}</div>
+        </div>
+        <div className="flex flex-wrap gap-3 my-2">
+          {oldImages.length > 0 &&
+            oldImages.map((x) => (
+              <img key={x} src={x} className="w-20 rounded-md object-cover" />
+            ))}
+        </div>
       </div>
       <FormInput
         title={"Price"}
@@ -130,8 +162,8 @@ export default function ProfilePageForm() {
         >
           Update Profile
         </button>
-        {loading && <Loading />}
       </div>
+      {loading && <Loading />}
     </div>
   );
 }

@@ -6,7 +6,7 @@ export default function DashboardPage() {
   return (
     <div>
       <DashboardStatsContainer />
-      <RecentRequestTable />
+      {/* <RecentRequestTable /> */}
     </div>
   );
 }

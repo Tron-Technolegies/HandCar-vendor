@@ -19,12 +19,12 @@ export default function Header() {
         <GiHamburgerMenu />
       </button>
       <div className="flex gap-2 items-center relative">
-        <Link
+        {/* <Link
           to={"/notification"}
           className="w-[40px] h-[40px] rounded-full p-2 bg-[#F3F8FF] flex justify-center items-center text-lg"
         >
           <IoNotifications />
-        </Link>
+        </Link> */}
         <ProfileBox setDropdown={setShowDropdown} showDropdown={showDropdown} />
       </div>
       {showDropdown && <Dropdown setSHowDropdown={setShowDropdown} />}
