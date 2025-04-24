@@ -4,12 +4,12 @@ import { FaUser } from "react-icons/fa";
 import { RxUpdate } from "react-icons/rx";
 
 export const navItems = [
-  // {
-  //   id: 1,
-  //   icon: <MdOutlineSubscriptions />,
-  //   name: "Subscriptions",
-  //   path: "/subscriptions",
-  // },
+  {
+    id: 1,
+    icon: <MdOutlineSubscriptions />,
+    name: "Subscriptions",
+    path: "/subscriptions",
+  },
   // {
   //   id: 2,
   //   icon: <MdHomeRepairService />,
@@ -28,10 +28,10 @@ export const navItems = [
     name: "Update Password",
     path: "/update-password",
   },
-  // {
-  //   id: 3,
-  //   icon: <IoPersonAddSharp />,
-  //   name: "Requests",
-  //   path: "/requests",
-  // },
+  {
+    id: 5,
+    icon: <IoPersonAddSharp />,
+    name: "Requests",
+    path: "/requests",
+  },
 ];

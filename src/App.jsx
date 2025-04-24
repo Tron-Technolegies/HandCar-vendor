@@ -21,26 +21,26 @@ export default function App() {
       errorElement: <ErrorPage />,
       children: [
         { index: true, element: <DashboardPage /> },
-        // {
-        //   path: "subscriptions",
-        //   element: <SubscriptionPage />,
-        // },
-        // {
-        //   path: "services",
-        //   element: <ServicePage />,
-        // },
-        // {
-        //   path: "services/new",
-        //   element: <AddNewServicePage />,
-        // },
-        // {
-        //   path: "services/:id/edit",
-        //   element: <EditService />,
-        // },
-        // {
-        //   path: "requests",
-        //   element: <RequestsPage />,
-        // },
+        {
+          path: "subscriptions",
+          element: <SubscriptionPage />,
+        },
+        {
+          path: "services",
+          element: <ServicePage />,
+        },
+        {
+          path: "services/new",
+          element: <AddNewServicePage />,
+        },
+        {
+          path: "services/:id/edit",
+          element: <EditService />,
+        },
+        {
+          path: "requests",
+          element: <RequestsPage />,
+        },
         {
           path: "profile",
           element: <ProfilePage />,
