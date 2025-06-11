@@ -1,20 +1,15 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import FormInput from "../FormInput";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import FormSelect from "../FormSelect";
 import { FiUpload } from "react-icons/fi";
-import { VendorContext } from "../../VendorContext";
+
 import useUpdateUserDetails from "../../hooks/auth/useUpdateUserDetails";
 import Loading from "../Loading";
 import useGetServiceCategories from "../../hooks/auth/useGetServiceCategories";
-import useGetUpdateProfileDetails from "../../hooks/auth/useGetUpdateProfileDetails";
 
-export default function ProfilePageForm() {
-  const { user } = useContext(VendorContext);
-  const { loading: initialLoading, profile } = useGetUpdateProfileDetails({
-    id: user?.id,
-  });
+export default function ProfilePageForm({ user }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [mobile, setMobile] = useState("");
@@ -29,18 +24,18 @@ export default function ProfilePageForm() {
   const { loading: categoryLoading, categories } = useGetServiceCategories();
 
   useEffect(() => {
-    if (profile) {
-      setName(profile.vendor_name);
-      setEmail(profile.email);
-      setMobile(profile.phone_number);
-      setWhatsapp(profile.whatsapp_number);
-      setAddress(profile.address);
-      setCategory(profile.service_category);
-      setDetails(profile.service_details);
-      setPrice(profile.rate);
-      setOldImages(profile.images);
+    if (user) {
+      setName(user.vendor_name);
+      setEmail(user.email);
+      setMobile(user.phone_number);
+      setWhatsapp(user.whatsapp_number);
+      setAddress(user.address);
+      setCategory(user.service_category);
+      setDetails(user.service_details);
+      setPrice(user.rate);
+      setOldImages(user.image);
     }
-  }, [initialLoading, profile]);
+  }, [user]);
 
   return initialLoading ? (
     <Loading />
