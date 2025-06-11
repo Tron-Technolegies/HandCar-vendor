@@ -37,7 +37,7 @@ export default function ProfilePageForm({ user }) {
     }
   }, [user]);
 
-  return initialLoading ? (
+  return categoryLoading ? (
     <Loading />
   ) : (
     <div className="p-5 rounded-lg bg-white">
