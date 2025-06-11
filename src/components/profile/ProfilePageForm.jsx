@@ -123,8 +123,8 @@ export default function ProfilePageForm({ user }) {
           <div>{image.length > 0 && <p>{image.length} files uploaded</p>}</div>
         </div>
         <div className="flex flex-wrap gap-3 my-2">
-          {oldImages.length > 0 &&
-            oldImages.map((x) => (
+          {oldImages?.length > 0 &&
+            oldImages?.map((x) => (
               <img key={x} src={x} className="w-20 rounded-md object-cover" />
             ))}
         </div>
