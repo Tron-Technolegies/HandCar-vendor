@@ -8,6 +8,7 @@ import { FiUpload } from "react-icons/fi";
 import useUpdateUserDetails from "../../hooks/auth/useUpdateUserDetails";
 import Loading from "../Loading";
 import useGetServiceCategories from "../../hooks/auth/useGetServiceCategories";
+import useGetUserDetaiils from "../../hooks/auth/useGetUserDetaiils";
 
 export default function ProfilePageForm({ user }) {
   const [name, setName] = useState("");
@@ -22,6 +23,7 @@ export default function ProfilePageForm({ user }) {
   const [price, setPrice] = useState("");
   const { loading, updateUserDetails } = useUpdateUserDetails();
   const { loading: categoryLoading, categories } = useGetServiceCategories();
+  const { refetch } = useGetUserDetaiils();
 
   useEffect(() => {
     if (user) {
@@ -139,8 +141,8 @@ export default function ProfilePageForm({ user }) {
 
       <div className="flex justify-end">
         <button
-          onClick={() =>
-            updateUserDetails({
+          onClick={async () => {
+            await updateUserDetails({
               id: user.id,
               name,
               email,
@@ -151,8 +153,9 @@ export default function ProfilePageForm({ user }) {
               details,
               price,
               image,
-            })
-          }
+            });
+            refetch();
+          }}
           className="px-4 py-2 bg-[#06214E] rounded-lg text-white "
         >
           Update Profile

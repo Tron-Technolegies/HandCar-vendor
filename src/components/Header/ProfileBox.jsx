@@ -9,7 +9,9 @@ export default function ProfileBox({ setDropdown, showDropdown }) {
       className="flex gap-3 items-center p-2 bg-[#F3F8FF] rounded-lg cursor-pointer"
       onClick={() => setDropdown(!showDropdown)}
     >
-      <img src="/profile.jpg" className="w-[30px] h-[30px] rounded-full"></img>
+      <p className="w-[30px] h-[30px] flex justify-center items-center rounded-full">
+        <span> {user?.vendor_name?.slice(0, 1).toUpperCase()}</span>
+      </p>
       {user && <p>{user.vendor_name}</p>}
       <button>
         <FaAngleDown />
