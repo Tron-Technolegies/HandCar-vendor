@@ -10,12 +10,12 @@ export const navItems = [
     name: "Subscriptions",
     path: "/subscriptions",
   },
-  {
-    id: 2,
-    icon: <MdHomeRepairService />,
-    name: "Services",
-    path: "/services",
-  },
+  // {
+  //   id: 2,
+  //   icon: <MdHomeRepairService />,
+  //   name: "Services",
+  //   path: "/services",
+  // },
   {
     id: 3,
     icon: <FaUser />,
@@ -28,10 +28,10 @@ export const navItems = [
     name: "Update Password",
     path: "/update-password",
   },
-  {
-    id: 5,
-    icon: <IoPersonAddSharp />,
-    name: "Requests",
-    path: "/requests",
-  },
+  // {
+  //   id: 5,
+  //   icon: <IoPersonAddSharp />,
+  //   name: "Requests",
+  //   path: "/requests",
+  // },
 ];
