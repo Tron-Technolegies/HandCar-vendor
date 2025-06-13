@@ -11,7 +11,7 @@ const useGetAllSubscriptions = () => {
     setLoading(true);
     try {
       const res = await axios.get(`${base_url}/get_vendor_subscribers`, {
-        withCredentials,
+        withCredentials: true,
       });
       const data = res.data;
       setSubscribers(data.subscribers);
