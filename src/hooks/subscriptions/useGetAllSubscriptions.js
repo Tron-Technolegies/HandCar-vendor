@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { base_url } from "../../constants";
 
 const useGetAllSubscriptions = () => {
   const [loading, setLoading] = useState(false);
@@ -9,12 +10,17 @@ const useGetAllSubscriptions = () => {
   const getAllSubscribers = async () => {
     setLoading(true);
     try {
-      const res = await axios.get("url");
+      const res = await axios.get(`${base_url}/get_vendor_subscribers`, {
+        withCredentials,
+      });
       const data = res.data;
       setSubscribers(data.subscribers);
     } catch (err) {
-      toast.error(
-        err?.response?.data?.msg || err?.error || "something went wrong"
+      console.log(
+        err?.response?.data?.message ||
+          err?.response?.data?.error ||
+          err?.message ||
+          "something went wrong"
       );
     } finally {
       setLoading(false);

@@ -19,7 +19,12 @@ const useGetUserDetaiils = () => {
       const data = res.data;
       setUser(data);
     } catch (err) {
-      console.log(err);
+      console.log(
+        err?.response?.data?.message ||
+          err?.response?.data?.error ||
+          err?.message ||
+          "something went wrong"
+      );
       navigate("/login");
     } finally {
       setLoading(false);
