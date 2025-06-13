@@ -12,7 +12,7 @@ const useUpdatePassword = () => {
     setLoading(true);
     try {
       const res = await axios.post(
-        `${base_url}/change_vendor_password/${vendor_id}/`,
+        `${base_url}/change_vendor_password/`,
         {
           old_password,
           new_password,
