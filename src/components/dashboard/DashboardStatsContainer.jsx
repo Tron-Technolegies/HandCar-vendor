@@ -2,13 +2,18 @@ import React from "react";
 import StatItem from "./StatItem";
 import { IoPersonAddSharp } from "react-icons/io5";
 import { MdHomeRepairService, MdOutlineSubscriptions } from "react-icons/md";
+import useGetDashBoardStats from "../../hooks/dashboard/useGetDashBoardStats";
+import Loading from "../Loading";
 
 export default function DashboardStatsContainer() {
-  return (
+  const { loading, subscribers } = useGetDashBoardStats();
+  return loading ? (
+    <Loading />
+  ) : (
     <div className="grid md:grid-cols-3 grid-cols-1 gap-5">
       <StatItem
         icon={<IoPersonAddSharp />}
-        stat={2}
+        stat={subscribers}
         statName={"Service Requests"}
         rise={false}
         data={[5, 4, 4, 3.5, 3, 1]}
@@ -20,7 +25,7 @@ export default function DashboardStatsContainer() {
       <StatItem
         icon={<MdHomeRepairService />}
         stat={22}
-        statName={"Total Services"}
+        statName={"Total Subscribers"}
         data={[5, 10, 12, 25, 30, 31]}
         rise={true}
         value={"15%"}

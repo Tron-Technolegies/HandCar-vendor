@@ -1,17 +1,18 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { base_url } from "../../constants";
 
 const useGetDashBoardStats = () => {
   const [loading, setLoading] = useState(false);
-  const [stats, setStats] = useState(null);
+  const [subscribers, setSubscribers] = useState(null);
 
   const getDashboardStats = async () => {
     setLoading(true);
     try {
-      const res = await axios.get("url");
+      const res = await axios.get(`${base_url}/vendor_dashboard`);
       const data = res.data;
-      setStats(data.stats);
+      setSubscribers(data.total_subscribers);
     } catch (err) {
       console.log(
         err?.response?.data?.message ||
@@ -27,7 +28,7 @@ const useGetDashBoardStats = () => {
     getDashboardStats();
   }, []);
 
-  return { loading, stats };
+  return { loading, subscribers };
 };
 
 export default useGetDashBoardStats;

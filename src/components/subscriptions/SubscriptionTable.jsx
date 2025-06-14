@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -10,8 +10,14 @@ import { GoDotFill } from "react-icons/go";
 import useGetAllSubscriptions from "../../hooks/subscriptions/useGetAllSubscriptions";
 import Loading from "../Loading";
 
-export default function SubscriptionTable() {
-  const { loading, subscribers } = useGetAllSubscriptions();
+export default function SubscriptionTable({ search, refetchTrigger }) {
+  const { loading, subscribers, refetch } = useGetAllSubscriptions({
+    search: search || "",
+  });
+
+  useEffect(() => {
+    refetch();
+  }, [refetchTrigger]);
   return loading ? (
     <Loading />
   ) : (

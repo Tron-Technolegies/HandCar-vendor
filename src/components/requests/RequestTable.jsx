@@ -8,22 +8,14 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { SiTicktick } from "react-icons/si";
 import { MdOutlineBlock } from "react-icons/md";
-
-function createData(name, mobile, service) {
-  return { name, mobile, service };
-}
-
-const rows = [
-  createData("Tom Cruise", "96587452546", "Maintenance"),
-  createData("Tom Cruise", "96587452546", "Maintenance"),
-  createData("Tom Cruise", "96587452546", "Maintenance"),
-  createData("Tom Cruise", "96587452546", "Maintenance"),
-  createData("Tom Cruise", "96587452546", "Maintenance"),
-  createData("Tom Cruise", "96587452546", "Maintenance"),
-];
+import useGetAllRequests from "../../hooks/requests/useGetAllRequests";
+import Loading from "../Loading";
 
 export default function RequestTable() {
-  return (
+  const { loading, requests, refetch } = useGetAllRequests({ search: "" });
+  return loading ? (
+    <Loading />
+  ) : (
     <>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -52,7 +44,7 @@ export default function RequestTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row, index) => (
+            {requests.map((row, index) => (
               <TableRow
                 key={index}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}

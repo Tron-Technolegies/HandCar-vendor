@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { base_url } from "../../constants";
 import { VendorContext } from "../../VendorContext";
 
-const useGetAllSubscriptions = () => {
+const useGetAllSubscriptions = ({ search }) => {
   const [loading, setLoading] = useState(false);
   const [subscribers, setSubscribers] = useState([]);
   const { user } = useContext(VendorContext);
@@ -16,6 +16,9 @@ const useGetAllSubscriptions = () => {
         `${base_url}/get_vendor_subscribers/${user.id}/`,
         {
           withCredentials: true,
+          params: {
+            search,
+          },
         }
       );
       const data = res.data;
@@ -35,7 +38,11 @@ const useGetAllSubscriptions = () => {
     getAllSubscribers();
   }, []);
 
-  return { loading, subscribers };
+  const refetch = () => {
+    getAllSubscribers();
+  };
+
+  return { loading, subscribers, refetch };
 };
 
 export default useGetAllSubscriptions;
