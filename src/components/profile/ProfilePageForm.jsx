@@ -35,7 +35,7 @@ export default function ProfilePageForm({ user }) {
       setCategory(user.service_category);
       setDetails(user.service_details);
       setPrice(user.rate);
-      setOldImages(user.image);
+      setOldImages(user.images);
     }
   }, [user]);
 
