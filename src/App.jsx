@@ -37,10 +37,10 @@ export default function App() {
         //   path: "services/:id/edit",
         //   element: <EditService />,
         // },
-        // {
-        //   path: "requests",
-        //   element: <RequestsPage />,
-        // },
+        {
+          path: "requests",
+          element: <RequestsPage />,
+        },
         {
           path: "profile",
           element: <ProfilePage />,

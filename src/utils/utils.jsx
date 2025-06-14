@@ -28,10 +28,10 @@ export const navItems = [
     name: "Update Password",
     path: "/update-password",
   },
-  // {
-  //   id: 5,
-  //   icon: <IoPersonAddSharp />,
-  //   name: "Requests",
-  //   path: "/requests",
-  // },
+  {
+    id: 5,
+    icon: <IoPersonAddSharp />,
+    name: "Requests",
+    path: "/requests",
+  },
 ];
